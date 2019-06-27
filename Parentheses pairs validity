@@ -1,0 +1,42 @@
+import java.util.Stack;
+/*
+ * msfata programminghelp
+ */
+public class Parentheses {
+	private static boolean checckString(String string) {
+		Stack<Character> s = new Stack<Character>();
+		if (string.length() > 0) {
+			for (int index = 0; index < string.length(); index++) {// loop start
+				char ch = string.charAt(index);
+				if (ch == '{' || ch == '[' || ch == '(' || ch == '}' || ch == ']' || ch == ')') {// valid entry start
+					if (ch == '{' || ch == '[' || ch == '(') {
+						s.push(ch);
+					} else if (ch == '}') {
+						if (s.isEmpty() || s.pop() != '{') {
+							return false;
+						}
+					} else if (ch == ']') {
+						if (s.isEmpty() || s.pop() != '[') {
+							return false;
+						}
+					} else if (ch == ')') {
+						if (s.isEmpty() || s.pop() != '(') {
+							return false;
+						}
+					}
+				} else {// valid entry end
+					return false;
+				}
+			} // end loop
+
+		} else {
+			return false;
+		}
+		return s.isEmpty();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(checckString("[]"));
+	}
+
+}
